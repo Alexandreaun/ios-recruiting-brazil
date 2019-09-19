@@ -10,9 +10,11 @@ import Foundation
 
 class ApiMovie: Api{
     
-    func getApiMovie(completion: @escaping (Movie?, ValidationError?) -> Void){
+    func getApiMovie(page: Int, completion: @escaping (Movie?, ValidationError?) -> Void){
         
-        if let url = URL(string: ApiMovie().baseUrl+ApiMovie().apiKey){
+        let param = "&page=\(page)"
+        
+        if let url = URL(string: ApiMovie().baseUrl+ApiMovie().apiKey+param){
             
             URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if let httpResponse = response as? HTTPURLResponse{
@@ -22,7 +24,9 @@ class ApiMovie: Api{
                         if let data = data{
                             
                             do{
-                                let json = try JSONDecoder().decode(Movie.self, from: data)
+                                let decoder = JSONDecoder()
+                                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                                let json = try decoder.decode(Movie.self, from: data)
                                 completion(json, nil)
                             }catch{
                                 
@@ -40,13 +44,48 @@ class ApiMovie: Api{
                     }
                 }
             }.resume()
-            
-            
         }
-        
-
     }
     
+    func getApiGenres(completion: @escaping (Genres?, ValidationError?) -> Void){
+        
+        
+        if let url = URL(string: ApiMovie().genreBaseUrl+ApiMovie().movieGenre+ApiMovie().apiKey){
+            
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if let httpResponse = response as? HTTPURLResponse{
+                    
+                    if httpResponse.statusCode == 200{
+                        
+                        if let data = data{
+                            
+                            do{
+                                let decoder = JSONDecoder()
+                                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                                let json = try decoder.decode(Genres.self, from: data)
+                                completion(json, nil)
+                            }catch{
+                                
+                                let error = ValidationError(imageError: "Erro ao carregar dados da Api")
+                                
+                                completion(nil, error)
+                            }
+                            
+                        }
+                        
+                        
+                    }else{
+                        let error = ValidationError(imageError: "Erro ao carregar dados da Api")
+                        completion(nil, error)
+                    }
+                }
+            }.resume()
+        }
+        
+        
+        
+        
+    }
     
     
     

@@ -12,13 +12,15 @@ class MovieListDataProvider{
     
     let apimovie = ApiMovie()
     var arrayMovies: [Movies] = []
+    var arrayGenres: [Genre] = []
+    var page = 1
     
     func getMovies(completion: @escaping (ValidationError?) -> Void){
         
-        apimovie.getApiMovie { (movie, error) in
+        apimovie.getApiMovie(page: page) { (movie, error) in
             if error == nil{
                 if let movies = movie{
-                    self.arrayMovies = movies.results
+                    self.arrayMovies.append(contentsOf: movies.results)
                     completion(nil)
                     print(self.arrayMovies)
                     return
@@ -30,6 +32,27 @@ class MovieListDataProvider{
         }
 
     }
+    
+    func getGenres(completion: @escaping (ValidationError?)-> Void){
+        
+        apimovie.getApiGenres { (genres, error) in
+            
+            guard let error = error else{
+                self.arrayGenres = genres?.genres ?? []
+                completion(nil)
+                return
+            }
+            completion(error)
+            return
+            
+        }
+        
+    }
+    
+    
+    
+    
+    
     
     func numberOfItemsInSection() -> Int{
         
