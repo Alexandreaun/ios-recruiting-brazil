@@ -50,21 +50,11 @@ class MovieListDataProvider{
     }
     
     
-    
-    
-    
-    
     func numberOfItemsInSection() -> Int{
         
         return arrayMovies.count
         
     }
-    
-    
-    
-    
-    
-    
     
     
 }

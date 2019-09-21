@@ -17,10 +17,34 @@
                     <view key="view" contentMode="scaleToFill" id="Kck-xf-sDo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VHZ-mC-onc">
+                                <rect key="frame" x="0.0" y="144" width="414" height="669"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="jJZ-0g-tth">
+                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="VHZ-mC-onc" firstAttribute="top" secondItem="jJZ-0g-tth" secondAttribute="bottom" id="3hI-d8-XDO"/>
+                            <constraint firstItem="VHZ-mC-onc" firstAttribute="leading" secondItem="R7c-Hc-Ooy" secondAttribute="leading" id="9Rg-a0-IEh"/>
+                            <constraint firstItem="VHZ-mC-onc" firstAttribute="bottom" secondItem="R7c-Hc-Ooy" secondAttribute="bottom" id="K8E-uN-3xu"/>
+                            <constraint firstItem="jJZ-0g-tth" firstAttribute="leading" secondItem="R7c-Hc-Ooy" secondAttribute="leading" id="SSA-Z0-cO6"/>
+                            <constraint firstItem="jJZ-0g-tth" firstAttribute="top" secondItem="R7c-Hc-Ooy" secondAttribute="top" id="Sv4-k5-xXz"/>
+                            <constraint firstItem="VHZ-mC-onc" firstAttribute="trailing" secondItem="R7c-Hc-Ooy" secondAttribute="trailing" id="VUz-Vh-uJH"/>
+                            <constraint firstItem="jJZ-0g-tth" firstAttribute="trailing" secondItem="R7c-Hc-Ooy" secondAttribute="trailing" id="cAj-Fg-gfK"/>
+                            <constraint firstItem="VHZ-mC-onc" firstAttribute="top" secondItem="jJZ-0g-tth" secondAttribute="bottom" id="iN9-pv-lFF"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="R7c-Hc-Ooy"/>
                     </view>
                     <navigationItem key="navigationItem" id="ekN-9F-vGf"/>
+                    <connections>
+                        <outlet property="favoriteTableView" destination="VHZ-mC-onc" id="QtB-86-gSo"/>
+                        <outlet property="searchBar" destination="jJZ-0g-tth" id="ceu-l5-Z8a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V6p-CC-sRt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

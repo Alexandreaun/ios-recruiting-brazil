@@ -25,7 +25,7 @@
                             <constraint firstAttribute="width" secondItem="hEZ-xt-NGN" secondAttribute="height" multiplier="2:3" id="iaA-0U-emM"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxV-rl-6hV">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="AxV-rl-6hV">
                         <rect key="frame" x="6" y="287" width="130" height="36"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="130" id="v12-pM-vqh"/>
@@ -34,10 +34,9 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Cf-Nf-gdP">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Cf-Nf-gdP">
                         <rect key="frame" x="150" y="289" width="30" height="37"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                        <state key="normal" title="Button">
+                        <state key="normal">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                         <connections>
@@ -61,6 +60,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="189" height="329"/>
             <connections>
+                <outlet property="favoriteButton" destination="6Cf-Nf-gdP" id="a9W-1P-ZLO"/>
                 <outlet property="imageMovieCell" destination="hEZ-xt-NGN" id="fGu-Uw-fPI"/>
                 <outlet property="titleMovieCell" destination="AxV-rl-6hV" id="KbY-J5-b6H"/>
             </connections>
