@@ -8,22 +8,32 @@
 
 import UIKit
 
-class MovieListViewController: UIViewController {
+class MovieListViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var moviesCollectionView: UICollectionView!
-
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    
+    
     let movieListDataProvider = MovieListDataProvider()
     let favoritesDataProvider = FavoritesDataProvider()
+    let favoriteViewController = FavoriteViewController()
+    
+    var arraySearchBar: [Movies] = []
+    var searching: Bool = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchBar.barTintColor = .black
 
         moviesCollectionView.register(UINib(nibName: "MovieListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCell")
         requestGenres()
         requestMovies()
         moviesCollectionView.dataSource = self
         moviesCollectionView.delegate = self
+        searchBar.delegate = self
         
     }
     
@@ -52,12 +62,24 @@ class MovieListViewController: UIViewController {
         }
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.searchBar.resignFirstResponder()
+    }
+    
+    
+    
+    
 }
 
 extension MovieListViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movieListDataProvider.numberOfItemsInSection()
+        
+        if searching{
+            return arraySearchBar.count
+        }else{
+            return movieListDataProvider.numberOfItemsInSection()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,10 +87,17 @@ extension MovieListViewController: UICollectionViewDataSource, UICollectionViewD
             
             cell.delegate = self
             
+            
             let returnFavorite = favoritesDataProvider.arrayMovies.contains(where: {$0.id == movieListDataProvider.arrayMovies[indexPath.item].id})
             
-            cell.setupCell(movies: movieListDataProvider.arrayMovies[indexPath.item], index: indexPath, returnFavorite: returnFavorite)
+            if searching{
             
+            cell.setupCell(movies: arraySearchBar[indexPath.item], index: indexPath, returnFavorite: returnFavorite)
+            
+            }else{
+            cell.setupCell(movies: movieListDataProvider.arrayMovies[indexPath.item], index: indexPath, returnFavorite: returnFavorite)
+            cell.index = indexPath
+            }
             return cell
         }else{
             return UICollectionViewCell()
@@ -82,11 +111,20 @@ extension MovieListViewController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        if indexPath.item == (movieListDataProvider.page * 20) - 10{
+        if searching{
+            if indexPath.item == (movieListDataProvider.page * 20) - 10{
+                movieListDataProvider.page += 1
+                requestMovies()
+            }
+        }else{
             
-            movieListDataProvider.page += 1
-            requestMovies()
+            if indexPath.item == (movieListDataProvider.page * 20) - 10{
+                movieListDataProvider.page += 1
+                requestMovies()
+            }
+            
         }
+        
     }
     
     
@@ -94,20 +132,82 @@ extension MovieListViewController: UICollectionViewDataSource, UICollectionViewD
         
         if let vc = storyboard?.instantiateViewController(withIdentifier: "MovieDetailViewController") as? MovieDetailViewController{
             
-            vc.movie = movieListDataProvider.arrayMovies[indexPath.item]
-            vc.genres = movieListDataProvider.arrayGenres
-            navigationController?.pushViewController(vc, animated: true)
-            
+            if searching{
+                vc.movie = arraySearchBar[indexPath.item]
+                vc.genres = movieListDataProvider.arrayGenres
+                navigationController?.pushViewController(vc, animated: true)
+
+            }else{
+                vc.movie = movieListDataProvider.arrayMovies[indexPath.item]
+                vc.genres = movieListDataProvider.arrayGenres
+                navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
 }
 
 extension MovieListViewController: MovieListCellDelegate{
+
     func saveFavorite(index: IndexPath) {
+        print("Clicou na cell \(index)")
+        if searching{
+        favoritesDataProvider.saveInformation(movie: arraySearchBar[index.item], genres: movieListDataProvider.arrayGenres, indexpath: index.item)
+        }else{
         favoritesDataProvider.saveInformation(movie: movieListDataProvider.arrayMovies[index.item], genres: movieListDataProvider.arrayGenres, indexpath: index.item)
+        }
     }
-}
     
+    func unfavoriteMovie(index: IndexPath) {
+        print("Clicou na cell \(index)")
+        
+        if searching{
+            // configurar
+        }else{
+            
+            
+            favoritesDataProvider.deleteInformation(id: favoritesDataProvider.arrayDataMovies[index.item].objectID) { (deleted) in
+                if deleted{
+                    favoritesDataProvider.loadInformation(completion: { (movies, genre) in
+                        if movies != nil{
+                            if let movie = movies{
+                                favoriteViewController.arrayMovies = movie
+                            }else{
+                                print("It was not possible unfavorite the Movie")
+                            }
+                            
+                        }
+                    })
+                }
+                
+            }
+            
+            
+        }
+    }
+
+}
+
+extension MovieListViewController: UISearchBarDelegate{
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        arraySearchBar = movieListDataProvider.arrayMovies.filter({$0.title.prefix(searchText.count) == searchText})
+        searching = true
+        moviesCollectionView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    
+    
+}
+
+
+    
+    
+    
+
     
     
     

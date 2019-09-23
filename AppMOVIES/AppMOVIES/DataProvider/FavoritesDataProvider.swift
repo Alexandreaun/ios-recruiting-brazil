@@ -142,7 +142,6 @@ class FavoritesDataProvider: NSObject{
     
     
     func deleteInformation(id: NSManagedObjectID, completion: (Bool) -> Void){
-        
         let context = persistentContainer.viewContext
         let object = context.object(with: id)
         

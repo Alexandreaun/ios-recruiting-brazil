@@ -86,6 +86,7 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource{
     
     func unfavoriteMovie(index: IndexPath) {
         favoritesDataProvider.deleteInformation(id: favoritesDataProvider.arrayDataMovies[index.row].objectID) { (deleted) in
+           // favoritesDataProvider.deleteInformation(id: favoritesDataProvider.arrayDataMovies[index.row].objectID) { (deleted) in
             if deleted{
                 loadFavoriteMovie()
             }else{
@@ -94,24 +95,19 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource{
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "MovieDetailViewController") as? MovieDetailViewController{
+            
+            vc.movie = favoritesDataProvider.arrayMovies[indexPath.row]
+            vc.genres = favoritesDataProvider.arrayGenres
+            navigationController?.pushViewController(vc, animated: true)
+            
+        }
+    }
+    
     
 }
 
-//extension FavoriteViewController: FavoriteCellDelegate{
-//    func unfavoriteMovie(index: IndexPath) {
-//        favoritesDataProvider.deleteInformation(id: favoritesDataProvider.arrayDataMovies[index.row].objectID) { (deleted) in
-//            if deleted{
-//                loadFavoriteMovie()
-//            }else{
-//                print("It was not possible unfavorite the Movie")
-//            }
-//        }
-//    }
-//
-//
-//
-//
-//
-//
-//
-//}
+
+
+

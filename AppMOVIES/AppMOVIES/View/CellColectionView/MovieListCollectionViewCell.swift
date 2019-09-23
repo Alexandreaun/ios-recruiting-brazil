@@ -10,8 +10,10 @@ import UIKit
 
 protocol MovieListCellDelegate: class {
     func saveFavorite(index: IndexPath)
+    func unfavoriteMovie(index: IndexPath) 
     
 }
+
 
 
 class MovieListCollectionViewCell: UICollectionViewCell {
@@ -21,9 +23,14 @@ class MovieListCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var favoriteButton: UIButton!
     
     weak var delegate:MovieListCellDelegate?
+    let favoriteViewController = FavoriteViewController()
+    let movielistDataProvider = MovieListDataProvider()
+    let movieListViewController = MovieListViewController()
+    let favoritesDataProvider = FavoritesDataProvider()
     
     let api = Api()
     var index: IndexPath!
+    var indexUnfavorite: Int = 0
     
     
     override func awakeFromNib() {
@@ -54,24 +61,64 @@ class MovieListCollectionViewCell: UICollectionViewCell {
         }
         do{
             let data = try Data(contentsOf: url)
-            imageMovieCell.image = UIImage(data: data)
+            let imageData = UIImage(data: data)
+            DispatchQueue.main.async {
+                self.imageMovieCell.image = imageData
+
+            }
+
+            
         }catch{
             imageMovieCell.backgroundColor = .lightGray
         }
         
-        if returnFavorite == true{
-            favoriteButton.tintColor = .yellow
-        }
+//        if returnFavorite == true{
+//            favoriteButton.tintColor = .yellow
+//        }
         
+
+
+
     }
     
     
-    @IBAction func didTapFavoriteButton(_ sender: UIButton) {
+
+
         
 
+    
+    
+    @IBAction func didTapFavoriteButton(_ sender: UIButton) {
+        let row: Int = 1
+        let indexUnfavorite2 = IndexPath(row: row + 2, section: 0)
+
+        
+       favoriteButton = sender
+       favoriteButton.isSelected = !favoriteButton.isSelected
+        
+        if favoriteButton.isSelected{
+        
+   
         favoriteButton.tintColor = .orange
+        
 
         delegate?.saveFavorite(index: index)
+            print("favoritou")
+        }else{
+            
+            favoriteButton.tintColor = .lightGray
+        
+            delegate?.unfavoriteMovie(index: index)
+            print("desfavoritou")
+            
+
+            
+        
+        }
+            
+        
+
+        
         
     }
     
