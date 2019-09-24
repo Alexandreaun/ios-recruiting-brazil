@@ -82,12 +82,6 @@ class MovieListCollectionViewCell: UICollectionViewCell {
     }
     
     
-
-
-        
-
-    
-    
     @IBAction func didTapFavoriteButton(_ sender: UIButton) {
         let row: Int = 1
         let indexUnfavorite2 = IndexPath(row: row + 2, section: 0)
@@ -99,10 +93,10 @@ class MovieListCollectionViewCell: UICollectionViewCell {
         if favoriteButton.isSelected{
         
    
-        favoriteButton.tintColor = .orange
-        
-
-        delegate?.saveFavorite(index: index)
+            favoriteButton.tintColor = .orange
+            
+            
+            delegate?.saveFavorite(index: index)
             print("favoritou")
         }else{
             

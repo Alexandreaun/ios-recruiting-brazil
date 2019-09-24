@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FavoriteCellDelegate: class {
-    func unfavoriteMovie(index: IndexPath)
+    func unfavoriteMovie(index: Int)
     
 }
 
@@ -85,8 +85,8 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func unfavoriteMovie(index: IndexPath) {
+        
         favoritesDataProvider.deleteInformation(id: favoritesDataProvider.arrayDataMovies[index.row].objectID) { (deleted) in
-           // favoritesDataProvider.deleteInformation(id: favoritesDataProvider.arrayDataMovies[index.row].objectID) { (deleted) in
             if deleted{
                 loadFavoriteMovie()
             }else{

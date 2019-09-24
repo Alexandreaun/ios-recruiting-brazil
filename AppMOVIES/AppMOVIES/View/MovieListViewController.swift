@@ -9,7 +9,7 @@
 import UIKit
 
 class MovieListViewController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -27,7 +27,7 @@ class MovieListViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         searchBar.barTintColor = .black
-
+        
         moviesCollectionView.register(UINib(nibName: "MovieListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCell")
         requestGenres()
         requestMovies()
@@ -44,7 +44,7 @@ class MovieListViewController: UIViewController, UITextFieldDelegate {
                 self.favoritesDataProvider.loadInformation(completion: { (dataMovie, dataGenres) in
                     print(dataGenres, dataMovie)
                 })
-//                print(self.movieListDataProvider.arrayGenres)
+                //                print(self.movieListDataProvider.arrayGenres)
             }
         }
     }
@@ -61,7 +61,7 @@ class MovieListViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.searchBar.resignFirstResponder()
     }
@@ -91,19 +91,19 @@ extension MovieListViewController: UICollectionViewDataSource, UICollectionViewD
             let returnFavorite = favoritesDataProvider.arrayMovies.contains(where: {$0.id == movieListDataProvider.arrayMovies[indexPath.item].id})
             
             if searching{
-            
-            cell.setupCell(movies: arraySearchBar[indexPath.item], index: indexPath, returnFavorite: returnFavorite)
-            
+                
+                cell.setupCell(movies: arraySearchBar[indexPath.item], index: indexPath, returnFavorite: returnFavorite)
+                
             }else{
-            cell.setupCell(movies: movieListDataProvider.arrayMovies[indexPath.item], index: indexPath, returnFavorite: returnFavorite)
-            cell.index = indexPath
+                cell.setupCell(movies: movieListDataProvider.arrayMovies[indexPath.item], index: indexPath, returnFavorite: returnFavorite)
+                //cell.index = indexPath
             }
             return cell
         }else{
             return UICollectionViewCell()
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.size.width/2-10
         return CGSize(width: width, height: width*3/2 + 50)
@@ -136,7 +136,7 @@ extension MovieListViewController: UICollectionViewDataSource, UICollectionViewD
                 vc.movie = arraySearchBar[indexPath.item]
                 vc.genres = movieListDataProvider.arrayGenres
                 navigationController?.pushViewController(vc, animated: true)
-
+                
             }else{
                 vc.movie = movieListDataProvider.arrayMovies[indexPath.item]
                 vc.genres = movieListDataProvider.arrayGenres
@@ -147,15 +147,18 @@ extension MovieListViewController: UICollectionViewDataSource, UICollectionViewD
 }
 
 extension MovieListViewController: MovieListCellDelegate{
-
+    
     func saveFavorite(index: IndexPath) {
         print("Clicou na cell \(index)")
         if searching{
-        favoritesDataProvider.saveInformation(movie: arraySearchBar[index.item], genres: movieListDataProvider.arrayGenres, indexpath: index.item)
+            favoritesDataProvider.saveInformation(movie: arraySearchBar[index.item], genres: movieListDataProvider.arrayGenres, indexpath: index.item)
         }else{
-        favoritesDataProvider.saveInformation(movie: movieListDataProvider.arrayMovies[index.item], genres: movieListDataProvider.arrayGenres, indexpath: index.item)
+            favoritesDataProvider.saveInformation(movie: movieListDataProvider.arrayMovies[index.item], genres: movieListDataProvider.arrayGenres, indexpath: index.item)
         }
     }
+    
+    
+    
     
     func unfavoriteMovie(index: IndexPath) {
         print("Clicou na cell \(index)")
@@ -165,26 +168,32 @@ extension MovieListViewController: MovieListCellDelegate{
         }else{
             
             
-            favoritesDataProvider.deleteInformation(id: favoritesDataProvider.arrayDataMovies[index.item].objectID) { (deleted) in
-                if deleted{
-                    favoritesDataProvider.loadInformation(completion: { (movies, genre) in
-                        if movies != nil{
-                            if let movie = movies{
-                                favoriteViewController.arrayMovies = movie
-                            }else{
-                                print("It was not possible unfavorite the Movie")
+            favoritesDataProvider.loadInformation { (movies, genres) in
+                let teste = favoritesDataProvider.arrayDataMovies.filter{ Int($0.id) == movieListDataProvider.arrayMovies[index.item].id }
+                guard let t = teste.first else { return }
+                
+                favoritesDataProvider.deleteInformation(id: t.objectID) { (deleted) in
+                    if deleted{
+                        favoritesDataProvider.loadInformation(completion: { (movies, genre) in
+                            if movies != nil{
+                                if let movie = movies {
+                                    //favoritesDataProvider.arrayMovies = movie
+                                    favoriteViewController.arrayMovies = movie
+                                    
+                                }else{
+                                    print("It was not possible unfavorite the Movie")
+                                }
+                                
                             }
-                            
-                        }
-                    })
+                        })
+                    }
+                    
                 }
                 
             }
-            
-            
         }
     }
-
+    
 }
 
 extension MovieListViewController: UISearchBarDelegate{
@@ -204,14 +213,14 @@ extension MovieListViewController: UISearchBarDelegate{
 }
 
 
-    
-    
-    
 
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
 
