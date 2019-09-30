@@ -36,6 +36,9 @@ class FavoriteViewController: UIViewController {
 
         loadFavoriteMovie()
 
+        searchBar.barTintColor = .black
+        
+        favoriteTableView.tableFooterView = UIView()
         
     }
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol MovieListCellDelegate: class {
     func saveFavorite(index: IndexPath)
@@ -37,8 +38,10 @@ class MovieListCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         
         setupFavoriteButton()
-    
     }
+    
+    
+    
     
     func setupFavoriteButton() {
         let origImage = UIImage(named: "favoriteGrayIcon")
@@ -59,22 +62,17 @@ class MovieListCollectionViewCell: UICollectionViewCell {
             imageMovieCell.backgroundColor = .lightGray
             return
         }
-        do{
-            let data = try Data(contentsOf: url)
-            let imageData = UIImage(data: data)
-            DispatchQueue.main.async {
-                self.imageMovieCell.image = imageData
-
+    
+        imageMovieCell.sd_setImage(with: url) { (image, error, imageCachType, url) in
+            if error != nil{
+                self.imageMovieCell.backgroundColor = .lightGray
             }
-
-            
-        }catch{
-            imageMovieCell.backgroundColor = .lightGray
         }
         
-//        if returnFavorite == true{
-//            favoriteButton.tintColor = .yellow
-//        }
+    
+        if returnFavorite == true{
+            favoriteButton.tintColor = .yellow
+        }
         
 
 
@@ -83,22 +81,20 @@ class MovieListCollectionViewCell: UICollectionViewCell {
     
     
     @IBAction func didTapFavoriteButton(_ sender: UIButton) {
-        let row: Int = 1
-        let indexUnfavorite2 = IndexPath(row: row + 2, section: 0)
 
-        
-       favoriteButton = sender
        favoriteButton.isSelected = !favoriteButton.isSelected
+
+       favoriteButton = sender
         
         if favoriteButton.isSelected{
         
-   
+
             favoriteButton.tintColor = .orange
             
             
             delegate?.saveFavorite(index: index)
             print("favoritou")
-        }else{
+        }else if !favoriteButton.isSelected{
             
             favoriteButton.tintColor = .lightGray
         
@@ -106,14 +102,8 @@ class MovieListCollectionViewCell: UICollectionViewCell {
             print("desfavoritou")
             
 
-            
-        
         }
-            
-        
 
-        
-        
     }
     
     

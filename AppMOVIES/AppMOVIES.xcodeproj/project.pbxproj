@@ -28,9 +28,13 @@
 		ACF96C1B232F36C80082F179 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF96C1A232F36C80082F179 /* FavoriteViewController.swift */; };
 		ACF96C1F232F3AE30082F179 /* MovieListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF96C1D232F3AE30082F179 /* MovieListCollectionViewCell.swift */; };
 		ACF96C20232F3AE30082F179 /* MovieListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACF96C1E232F3AE30082F179 /* MovieListCollectionViewCell.xib */; };
+		F81C59B2B04F227858774BB5 /* Pods_AppMOVIES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32735F9EC9DCD83F4FC55089 /* Pods_AppMOVIES.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		002E182712CD93650D2AA10F /* Pods-AppMOVIES.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppMOVIES.release.xcconfig"; path = "Target Support Files/Pods-AppMOVIES/Pods-AppMOVIES.release.xcconfig"; sourceTree = "<group>"; };
+		32735F9EC9DCD83F4FC55089 /* Pods_AppMOVIES.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppMOVIES.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9879606EA8CF508B007E7EDC /* Pods-AppMOVIES.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppMOVIES.debug.xcconfig"; path = "Target Support Files/Pods-AppMOVIES/Pods-AppMOVIES.debug.xcconfig"; sourceTree = "<group>"; };
 		ACE841502330595000E7494A /* Genres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genres.swift; sourceTree = "<group>"; };
 		ACE8415223305DDF00E7494A /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		ACE9EC71232D2B9800388B28 /* AppMOVIES.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppMOVIES.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,17 +65,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F81C59B2B04F227858774BB5 /* Pods_AppMOVIES.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		009FEC5CB9D29A73E1E81129 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9879606EA8CF508B007E7EDC /* Pods-AppMOVIES.debug.xcconfig */,
+				002E182712CD93650D2AA10F /* Pods-AppMOVIES.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		29E3A37A992DD347DE4CF855 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				32735F9EC9DCD83F4FC55089 /* Pods_AppMOVIES.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		ACE9EC68232D2B9700388B28 = {
 			isa = PBXGroup;
 			children = (
 				ACE9EC73232D2B9800388B28 /* AppMOVIES */,
 				ACE9EC72232D2B9800388B28 /* Products */,
+				009FEC5CB9D29A73E1E81129 /* Pods */,
+				29E3A37A992DD347DE4CF855 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -183,9 +208,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ACE9EC86232D2B9A00388B28 /* Build configuration list for PBXNativeTarget "AppMOVIES" */;
 			buildPhases = (
+				8F93F91B2DAED959B9A5C12D /* [CP] Check Pods Manifest.lock */,
 				ACE9EC6D232D2B9800388B28 /* Sources */,
 				ACE9EC6E232D2B9800388B28 /* Frameworks */,
 				ACE9EC6F232D2B9800388B28 /* Resources */,
+				29BDDEF9D39514388E59F04D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -243,6 +270,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		29BDDEF9D39514388E59F04D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AppMOVIES/Pods-AppMOVIES-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AppMOVIES/Pods-AppMOVIES-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AppMOVIES/Pods-AppMOVIES-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8F93F91B2DAED959B9A5C12D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AppMOVIES-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		ACE9EC6D232D2B9800388B28 /* Sources */ = {
@@ -408,6 +477,7 @@
 		};
 		ACE9EC87232D2B9A00388B28 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9879606EA8CF508B007E7EDC /* Pods-AppMOVIES.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -426,6 +496,7 @@
 		};
 		ACE9EC88232D2B9A00388B28 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 002E182712CD93650D2AA10F /* Pods-AppMOVIES.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

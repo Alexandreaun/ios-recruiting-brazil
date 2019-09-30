@@ -9,7 +9,7 @@
 import UIKit
 
 class MovieDetailViewController: UIViewController {
-
+    
     let api = Api()
     var movie: Movies? = nil
     var genres: [Genre]?
@@ -23,7 +23,7 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupOutlets()
     }
     
@@ -35,59 +35,49 @@ class MovieDetailViewController: UIViewController {
         yearLabel.text = movie.releaseDate
         descriptionLabel.text = movie.overview
         
-        
         guard let genres = genres else{
             return
         }
         
-        let qtd = movie.genreIds.count
-
-        var nameGenres: [String] = []
-
-        if qtd > 0{
-
-            for index in 0...qtd{
-                let indexPos = index + 1
-                for g in movie.genreIds{
-
-                    for idGenres in genres{
-
-                        if g == idGenres.id{
-                            
-                            nameGenres.append(idGenres.name)
-                            
-                         //  genresLabel.text = "\(idGenres.name)"
-                        }
+        let qtdGenres = movie.genreIds.count
+        
+        var arrayNameGenres: [String] = []
+        
+        if qtdGenres > 0{
+            
+            for g in movie.genreIds{
+                
+                for idGenres in genres{
+                    
+                    if g == idGenres.id{
+                        
+                        arrayNameGenres.append(idGenres.name)
+                    }
+                    
                 }
             }
-             
-                var varNameGenres: String = ""
-                varNameGenres += nameGenres[indexPos]
+            
+            var namesGenres: String = ""
+            
+            for genres in arrayNameGenres{
                 
-               
-            genresLabel.text = "\(varNameGenres),\(nameGenres[index]) "
+                if genres == arrayNameGenres.last{
+                    namesGenres += genres
+                }else {
+                    namesGenres += genres + "," + " "
+                }
                 
-        
             }
+            
+            genresLabel.text = "\(namesGenres)"
+            
         }else{
             genresLabel.text = "Filme sem informação de Gênero"
         }
         
-            
-  
+        
         guard let back = movie.backdropPath else {
-            let imageString = api.imageUrl+movie.posterPath
-            
-            guard let url = URL(string: imageString)else{
-                imageView.backgroundColor = .lightGray
-                return
-            }
-            do{
-                let data = try Data(contentsOf: url)
-                imageView.image = UIImage(data: data)
-            }catch{
-                imageView.backgroundColor = .lightGray
-            }
+            imageView.backgroundColor = .lightGray
             return
         }
         
@@ -103,6 +93,21 @@ class MovieDetailViewController: UIViewController {
         }catch{
             imageView.backgroundColor = .lightGray
         }
+        
+        let dateString = movie.releaseDate
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        guard let date = formatter.date(from: dateString)else{
+            return
+        }
+        formatter.dateFormat = "yyyy"
+        let year = formatter.string(from: date)
+        formatter.dateFormat = "dd"
+        let day = formatter.string(from: date)
+        formatter.dateFormat = "MM"
+        let month = formatter.string(from: date)
+        yearLabel.text = "\(day)/\(month)/\(year)"
+        
     }
-
+    
 }

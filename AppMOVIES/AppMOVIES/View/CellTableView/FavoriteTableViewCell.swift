@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SDWebImage
 
 
 class FavoriteTableViewCell: UITableViewCell {
@@ -20,9 +20,7 @@ class FavoriteTableViewCell: UITableViewCell {
     let color = Colors()
     let api = Api()
     
-    
 
-    
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -40,12 +38,18 @@ class FavoriteTableViewCell: UITableViewCell {
             return
         }
         
-        do{
-            let data = try Data(contentsOf: url)
-            imageMovie.image = UIImage(data: data)
-        }catch{
-            imageMovie.backgroundColor = .lightGray
+        imageMovie.sd_setImage(with: url) { (image, error, imageCachType, url) in
+            if error != nil{
+                self.imageMovie.backgroundColor = .lightGray
+            }
         }
+        
+//        do{
+//            let data = try Data(contentsOf: url)
+//            imageMovie.image = UIImage(data: data)
+//        }catch{
+//            imageMovie.backgroundColor = .lightGray
+//        }
         
         let dateString = movie.releaseDate
         let formatter = DateFormatter()
