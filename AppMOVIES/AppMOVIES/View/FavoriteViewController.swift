@@ -19,12 +19,8 @@ class FavoriteViewController: UIViewController {
     @IBOutlet weak var favoriteTableView: UITableView!
     
     let color = Colors()
-    let favoritesDataProvider = FavoritesDataProvider()
-    var arrayMovies: [Movies] = []
     
     weak var delegate: FavoriteCellDelegate?
-
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +29,6 @@ class FavoriteViewController: UIViewController {
         
         favoriteTableView.delegate = self
         favoriteTableView.dataSource = self
-
-        loadFavoriteMovie()
 
         searchBar.barTintColor = .black
         
@@ -47,32 +41,40 @@ class FavoriteViewController: UIViewController {
     }
     
     func loadFavoriteMovie() {
-        favoritesDataProvider.loadInformation { (movies, genre) in
+        FavoritesDataProvider.shared.loadInformation { (movies, genre) in
             if movies != nil{
                 if let movie = movies{
-                    self.arrayMovies = movie
                     favoriteTableView.reloadData()
                 }
             }
         }
     }
+    
 
+    @IBAction func filterButton(_ sender: UIBarButtonItem) {
+        
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "filterStoryBoard") as? FilterViewController else {return }
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    
+    
 }
 
 extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favoritesDataProvider.arrayMovies.count
+        return FavoritesDataProvider.shared.arrayMovies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteTableViewCell", for: indexPath) as? FavoriteTableViewCell else{
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteTableViewCell", for: indexPath) as? FavoriteTableViewCell else {
             return UITableViewCell()
         }
     
-        cell.setupCell(movie: arrayMovies[indexPath.row])
-        
-    return cell
+        cell.setupCell(movie: FavoritesDataProvider.shared.arrayMovies[indexPath.row])
+        return cell
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -88,21 +90,21 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func unfavoriteMovie(index: IndexPath) {
-        
-        favoritesDataProvider.deleteInformation(id: favoritesDataProvider.arrayDataMovies[index.row].objectID) { (deleted) in
+        FavoritesDataProvider.shared.deleteInformation(id: FavoritesDataProvider.shared.arrayDataMovies[index.row].objectID) { (deleted) in
             if deleted{
                 loadFavoriteMovie()
             }else{
                 print("It was not possible unfavorite the Movie")
             }
+
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "MovieDetailViewController") as? MovieDetailViewController{
             
-            vc.movie = favoritesDataProvider.arrayMovies[indexPath.row]
-            vc.genres = favoritesDataProvider.arrayGenres
+            vc.movie = FavoritesDataProvider.shared.arrayMovies[indexPath.row]
+            vc.genres = FavoritesDataProvider.shared.arrayGenres
             navigationController?.pushViewController(vc, animated: true)
             
         }

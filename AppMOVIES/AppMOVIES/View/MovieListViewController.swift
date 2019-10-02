@@ -10,11 +10,12 @@ import UIKit
 
 class MovieListViewController: UIViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var errorView: ErrorView!
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     
     let movieListDataProvider = MovieListDataProvider()
-    let favoritesDataProvider = FavoritesDataProvider()
+//    let favoritesDataProvider = FavoritesDataProvider()
     let favoriteViewController = FavoriteViewController()
     
     var arraySearchBar: [Movies] = []
@@ -27,23 +28,34 @@ class MovieListViewController: UIViewController, UITextFieldDelegate {
         searchBar.barTintColor = .black
         
         moviesCollectionView.register(UINib(nibName: "MovieListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCell")
+        
+        
         requestGenres()
         requestMovies()
+        //addErrorView(error: ValidationError(imageError: "teste"))
         moviesCollectionView.dataSource = self
         moviesCollectionView.delegate = self
         searchBar.delegate = self
         
     }
     
+    func addErrorView(error: ValidationError) {
+        errorView.error = error
+        print(errorView.error)
+        errorView.showError()
+//        let errorView = ErrorView(frame: moviesCollectionView.frame)
+//        view.addSubview(errorView)
+        //        let errorView1 = UINib(nibName: "ErrorView", bundle: nil)
+//        let errorView = ErrorView(frame: moviesCollectionView.frame)
+//        errorView.error = error
+//        self.view.addSubview(errorView)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         
-        favoritesDataProvider.loadInformation { (movies, genre) in
+        FavoritesDataProvider.shared.loadInformation { (movies, genre) in
             if movies != nil{
                 guard let movie = movies else{return}
-               
-            
-                
-                self.favoritesDataProvider.arrayMovies = movie
                 self.moviesCollectionView.reloadData()
             }
         }
@@ -53,8 +65,8 @@ class MovieListViewController: UIViewController, UITextFieldDelegate {
     func requestGenres(){
         movieListDataProvider.getGenres { (error) in
             if error == nil{
-                self.favoritesDataProvider.saveGenres(genres: self.movieListDataProvider.arrayGenres)
-                self.favoritesDataProvider.loadInformation(completion: { (dataMovie, dataGenres) in
+                FavoritesDataProvider.shared.saveGenres(genres: self.movieListDataProvider.arrayGenres)
+                FavoritesDataProvider.shared.loadInformation(completion: { (dataMovie, dataGenres) in
                     print(dataGenres, dataMovie)
                 })
                 //                print(self.movieListDataProvider.arrayGenres)
@@ -67,16 +79,12 @@ class MovieListViewController: UIViewController, UITextFieldDelegate {
         movieListDataProvider.getMovies { (error) in
             if error == nil{
                 DispatchQueue.main.async {
-                    
                     self.moviesCollectionView.reloadData()
                 }
                 
             }
         }
     }
-    
-
-    
 }
 
 extension MovieListViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
@@ -94,12 +102,10 @@ extension MovieListViewController: UICollectionViewDataSource, UICollectionViewD
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? MovieListCollectionViewCell{
             
             cell.delegate = self
-            
-            
-            let returnFavorite = favoritesDataProvider.arrayMovies.contains(where: {$0.id == movieListDataProvider.arrayMovies[indexPath.item].id})
+
+            let returnFavorite = FavoritesDataProvider.shared.arrayDataMovies.contains{ $0.id == movieListDataProvider.arrayMovies[indexPath.item].id }
             
             if searching{
-                
                 cell.setupCell(movies: arraySearchBar[indexPath.item], index: indexPath, returnFavorite: returnFavorite)
                 
             }else{
@@ -158,28 +164,24 @@ extension MovieListViewController: MovieListCellDelegate{
     func saveFavorite(index: IndexPath) {
         print("Clicou na cell \(index)")
         if searching{
-            favoritesDataProvider.saveInformation(movie: arraySearchBar[index.item], genres: movieListDataProvider.arrayGenres, indexpath: index.item)
+            FavoritesDataProvider.shared.saveInformation(movie: arraySearchBar[index.item], genres: movieListDataProvider.arrayGenres, indexpath: index.item)
         }else{
-            favoritesDataProvider.saveInformation(movie: movieListDataProvider.arrayMovies[index.item], genres: movieListDataProvider.arrayGenres, indexpath: index.item)
+            FavoritesDataProvider.shared.saveInformation(movie: movieListDataProvider.arrayMovies[index.item], genres: movieListDataProvider.arrayGenres, indexpath: index.item)
         }
     }
-    
-    
-    
-    
+
     func unfavoriteMovie(index: IndexPath) {
         print("Clicou na cell \(index)")
-        
         if searching{
         
-            favoritesDataProvider.loadInformation { (movies, genres) in
-                let teste = favoritesDataProvider.arrayDataMovies.filter{ Int($0.id) ==
+            FavoritesDataProvider.shared.loadInformation { (movies, genres) in
+                let teste = FavoritesDataProvider.shared.arrayDataMovies.filter{ Int($0.id) ==
                     self.arraySearchBar[index.item].id}
                 guard let t = teste.first else { return }
                 
-                favoritesDataProvider.deleteInformation(id: t.objectID) { (deleted) in
+                FavoritesDataProvider.shared.deleteInformation(id: t.objectID) { (deleted) in
                     if deleted{
-                        favoritesDataProvider.loadInformation(completion: { (movies, genre) in
+                        FavoritesDataProvider.shared.loadInformation(completion: { (movies, genre) in
                             if movies != nil{
                                 if let movie = movies {
                                     //favoritesDataProvider.arrayMovies = movie
@@ -201,17 +203,17 @@ extension MovieListViewController: MovieListCellDelegate{
         }else{
             
             
-            favoritesDataProvider.loadInformation { (movies, genres) in
-                let teste = favoritesDataProvider.arrayDataMovies.filter{ Int($0.id) == movieListDataProvider.arrayMovies[index.item].id }
+            FavoritesDataProvider.shared.loadInformation { (movies, genres) in
+                let teste = FavoritesDataProvider.shared.arrayDataMovies.filter{ Int($0.id) == movieListDataProvider.arrayMovies[index.item].id }
                 guard let t = teste.first else { return }
                 
-                favoritesDataProvider.deleteInformation(id: t.objectID) { (deleted) in
+                FavoritesDataProvider.shared.deleteInformation(id: t.objectID) { (deleted) in
                     if deleted{
-                        favoritesDataProvider.loadInformation(completion: { (movies, genre) in
+                        FavoritesDataProvider.shared.loadInformation(completion: { (movies, genre) in
                             if movies != nil{
                                 if let movie = movies {
                                     //favoritesDataProvider.arrayMovies = movie
-                                    favoriteViewController.arrayMovies = movie
+                                    FavoritesDataProvider.shared.arrayMovies = movie
                                     
                                 }else{
                                     print("It was not possible unfavorite the Movie")
@@ -240,8 +242,6 @@ extension MovieListViewController: UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
-    
-    
 }
 
 

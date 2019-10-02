@@ -10,6 +10,11 @@ import Foundation
 import CoreData
 
 class FavoritesDataProvider: NSObject{
+    static let shared = FavoritesDataProvider()
+    
+    override init() {
+        
+    }
     
     lazy var persistentContainer: NSPersistentContainer = {
         
@@ -50,15 +55,6 @@ class FavoritesDataProvider: NSObject{
         dataMovie.voteCount = Int16(movie.voteCount)
         dataMovie.voteAverage = movie.voteAverage
         dataMovie.genreIds = movie.genreIds
-        
-//        let genreIds: [Int]
-//
-//
-//        dataGenres.id = Int16(genres[indexpath].id)
-//        print(dataMovie)
-        
-        //dataMovie.dataGenres = dataMovie
-//        dataMovie.dataGenres = NSSet(array: [dataGenres])
         
         do{
             try context.save()

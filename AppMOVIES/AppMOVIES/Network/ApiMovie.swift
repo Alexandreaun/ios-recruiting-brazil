@@ -30,16 +30,15 @@ class ApiMovie: Api{
                                 completion(json, nil)
                             }catch{
                                 
-                                let error = ValidationError(imageError: "Erro ao carregar dados da Api")
+                                let error = ValidationError(imageError: "Não foi possível parsear os dados da Api")
                                 
                                 completion(nil, error)
                             }
                             
                         }
                         
-    
                     }else{
-                        let error = ValidationError(imageError: "Erro ao carregar dados da Api")
+                        let error = ValidationError(imageError: "Erro \(httpResponse.statusCode)")
                         completion(nil, error)
                     }
                 }
@@ -66,30 +65,21 @@ class ApiMovie: Api{
                                 completion(json, nil)
                             }catch{
                                 
-                                let error = ValidationError(imageError: "Erro ao carregar dados da Api")
+                                let error = ValidationError(imageError: "Não foi possível parsear os dados da Api")
                                 
                                 completion(nil, error)
                             }
                             
                         }
                         
-                        
                     }else{
-                        let error = ValidationError(imageError: "Erro ao carregar dados da Api")
+                        let error = ValidationError(imageError: "Erro \(httpResponse.statusCode)")
                         completion(nil, error)
                     }
                 }
             }.resume()
         }
         
-        
-        
-        
     }
-    
-    
-    
-    
-    
-    
+
 }

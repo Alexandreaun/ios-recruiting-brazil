@@ -27,7 +27,6 @@ class MovieListCollectionViewCell: UICollectionViewCell {
     let favoriteViewController = FavoriteViewController()
     let movielistDataProvider = MovieListDataProvider()
     let movieListViewController = MovieListViewController()
-    let favoritesDataProvider = FavoritesDataProvider()
     
     let api = Api()
     var index: IndexPath!
@@ -70,13 +69,10 @@ class MovieListCollectionViewCell: UICollectionViewCell {
         }
         
     
-        if returnFavorite == true{
+        if returnFavorite{
             favoriteButton.tintColor = .yellow
         }
         
-
-
-
     }
     
     
@@ -89,7 +85,7 @@ class MovieListCollectionViewCell: UICollectionViewCell {
         if favoriteButton.isSelected{
         
 
-            favoriteButton.tintColor = .orange
+            favoriteButton.tintColor = .yellow
             
             
             delegate?.saveFavorite(index: index)

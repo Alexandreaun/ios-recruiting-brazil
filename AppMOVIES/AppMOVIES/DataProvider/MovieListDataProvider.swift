@@ -55,6 +55,4 @@ class MovieListDataProvider{
         return arrayMovies.count
         
     }
-    
-    
 }
