@@ -19,6 +19,7 @@
 		ACEAAC3B2342D6F0009FB92F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAAC392342D6F0009FB92F /* ErrorView.swift */; };
 		ACEAAC3C2342D6F0009FB92F /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACEAAC3A2342D6F0009FB92F /* ErrorView.xib */; };
 		ACEAAC3F23441B6F009FB92F /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAAC3E23441B6F009FB92F /* FilterViewController.swift */; };
+		ACEAAC41234428D5009FB92F /* FilterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAAC40234428D5009FB92F /* FilterDetailViewController.swift */; };
 		ACEC144E23359C4600C81D52 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC144C23359C4600C81D52 /* FavoriteTableViewCell.swift */; };
 		ACEC144F23359C4600C81D52 /* FavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACEC144D23359C4600C81D52 /* FavoriteTableViewCell.xib */; };
 		ACEC14522335A0E100C81D52 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC14512335A0E100C81D52 /* Colors.swift */; };
@@ -52,6 +53,7 @@
 		ACEAAC392342D6F0009FB92F /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		ACEAAC3A2342D6F0009FB92F /* ErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
 		ACEAAC3E23441B6F009FB92F /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		ACEAAC40234428D5009FB92F /* FilterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailViewController.swift; sourceTree = "<group>"; };
 		ACEC144C23359C4600C81D52 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		ACEC144D23359C4600C81D52 /* FavoriteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteTableViewCell.xib; sourceTree = "<group>"; };
 		ACEC14512335A0E100C81D52 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				ACF96C1A232F36C80082F179 /* FavoriteViewController.swift */,
 				ACE9EC76232D2B9800388B28 /* MovieListViewController.swift */,
 				ACE8415223305DDF00E7494A /* MovieDetailViewController.swift */,
+				ACEAAC40234428D5009FB92F /* FilterDetailViewController.swift */,
 				ACEAAC3E23441B6F009FB92F /* FilterViewController.swift */,
 				ACE9EC78232D2B9800388B28 /* Main.storyboard */,
 			);
@@ -341,6 +344,7 @@
 				ACF96C15232EF8080082F179 /* ValidationError.swift in Sources */,
 				ACEAAC3B2342D6F0009FB92F /* ErrorView.swift in Sources */,
 				ACEC144E23359C4600C81D52 /* FavoriteTableViewCell.swift in Sources */,
+				ACEAAC41234428D5009FB92F /* FilterDetailViewController.swift in Sources */,
 				ACE841512330595000E7494A /* Genres.swift in Sources */,
 				ACE8415323305DDF00E7494A /* MovieDetailViewController.swift in Sources */,
 				ACF96C13232EF5A50082F179 /* UIViewControllerExtension.swift in Sources */,
