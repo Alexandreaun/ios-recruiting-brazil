@@ -20,6 +20,7 @@
 		ACEAAC3C2342D6F0009FB92F /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACEAAC3A2342D6F0009FB92F /* ErrorView.xib */; };
 		ACEAAC3F23441B6F009FB92F /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAAC3E23441B6F009FB92F /* FilterViewController.swift */; };
 		ACEAAC41234428D5009FB92F /* FilterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAAC40234428D5009FB92F /* FilterDetailViewController.swift */; };
+		ACEADE6523457BEE001427C5 /* FilterDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEADE6423457BEE001427C5 /* FilterDataProvider.swift */; };
 		ACEC144E23359C4600C81D52 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC144C23359C4600C81D52 /* FavoriteTableViewCell.swift */; };
 		ACEC144F23359C4600C81D52 /* FavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACEC144D23359C4600C81D52 /* FavoriteTableViewCell.xib */; };
 		ACEC14522335A0E100C81D52 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC14512335A0E100C81D52 /* Colors.swift */; };
@@ -54,6 +55,7 @@
 		ACEAAC3A2342D6F0009FB92F /* ErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
 		ACEAAC3E23441B6F009FB92F /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		ACEAAC40234428D5009FB92F /* FilterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailViewController.swift; sourceTree = "<group>"; };
+		ACEADE6423457BEE001427C5 /* FilterDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDataProvider.swift; sourceTree = "<group>"; };
 		ACEC144C23359C4600C81D52 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		ACEC144D23359C4600C81D52 /* FavoriteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteTableViewCell.xib; sourceTree = "<group>"; };
 		ACEC14512335A0E100C81D52 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			children = (
 				ACF96C18232F0CEA0082F179 /* MovieListDataProvider.swift */,
 				ACEA7C492332D48A00944037 /* FavoritesDataProvider.swift */,
+				ACEADE6423457BEE001427C5 /* FilterDataProvider.swift */,
 			);
 			path = DataProvider;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 			files = (
 				ACE9EC77232D2B9800388B28 /* MovieListViewController.swift in Sources */,
 				ACE9EC7D232D2B9800388B28 /* AppMOVIES.xcdatamodeld in Sources */,
+				ACEADE6523457BEE001427C5 /* FilterDataProvider.swift in Sources */,
 				ACEA7C4A2332D48A00944037 /* FavoritesDataProvider.swift in Sources */,
 				ACF96C15232EF8080082F179 /* ValidationError.swift in Sources */,
 				ACEAAC3B2342D6F0009FB92F /* ErrorView.swift in Sources */,
