@@ -14,18 +14,45 @@ class FilterDataProvider{
     let movies = FavoritesDataProvider.shared.arrayMovies
     let genres = FavoritesDataProvider.shared.arrayGenres
     
-//    func filterGenresMoviesFavorites(index: Int) -> Bool{
-//
-//       let returnGenreFavorite = genres.contains{$0.id }
-//
-//
-//
-//    }
+    func filterGenresMoviesFavorites() -> [String]{
+        
+        var genresMoviesFavorites: [String] = []
+        
+        for idGenres in genres{
+            
+            for movieIdGenre in movies{
+                
+                for id in movieIdGenre.genreIds{
+                    
+                    if id == idGenres.id{
+                        
+                        genresMoviesFavorites.append(idGenres.name)
+                    }
+                }
+            }
+
+        }
+        
+        let removeDuplicates = NSOrderedSet(array: genresMoviesFavorites)
+
+        return removeDuplicates.array as? [String] ?? []
+        
+    }
     
-    
-    
-//    let returnFavorite = FavoritesDataProvider.shared.arrayDataMovies.contains{ $0.id == movieListDataProvider.arrayMovies[indexPath.item].id }
-    
+    func formateYearMovie(movie: Movies) -> String{
+        
+        let dateString = movie.releaseDate
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        guard let date = formatter.date(from: dateString)else{
+            return ""
+        }
+        formatter.dateFormat = "yyyy"
+        let year = formatter.string(from: date)
+        
+        return year
+        
+    }
     
     
     

@@ -59,6 +59,7 @@ class FavoriteTableViewCell: UITableViewCell {
         }
         formatter.dateFormat = "yyyy"
         let year = formatter.string(from: date)
+        
         labelYear.text = year
         
     }

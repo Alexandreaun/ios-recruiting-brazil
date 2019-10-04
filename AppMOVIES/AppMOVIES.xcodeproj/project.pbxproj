@@ -33,6 +33,7 @@
 		ACF96C1B232F36C80082F179 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF96C1A232F36C80082F179 /* FavoriteViewController.swift */; };
 		ACF96C1F232F3AE30082F179 /* MovieListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF96C1D232F3AE30082F179 /* MovieListCollectionViewCell.swift */; };
 		ACF96C20232F3AE30082F179 /* MovieListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACF96C1E232F3AE30082F179 /* MovieListCollectionViewCell.xib */; };
+		ACFC048A2346CB9200304A45 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFC04892346CB9200304A45 /* StringExtension.swift */; };
 		F81C59B2B04F227858774BB5 /* Pods_AppMOVIES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32735F9EC9DCD83F4FC55089 /* Pods_AppMOVIES.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,7 @@
 		ACF96C1A232F36C80082F179 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		ACF96C1D232F3AE30082F179 /* MovieListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCollectionViewCell.swift; sourceTree = "<group>"; };
 		ACF96C1E232F3AE30082F179 /* MovieListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieListCollectionViewCell.xib; sourceTree = "<group>"; };
+		ACFC04892346CB9200304A45 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				ACF96C12232EF5A50082F179 /* UIViewControllerExtension.swift */,
+				ACFC04892346CB9200304A45 /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				ACF96C0E232EE7E00082F179 /* Api.swift in Sources */,
 				ACF96C17232EFFC40082F179 /* Movie.swift in Sources */,
 				ACF96C1F232F3AE30082F179 /* MovieListCollectionViewCell.swift in Sources */,
+				ACFC048A2346CB9200304A45 /* StringExtension.swift in Sources */,
 				ACE9EC75232D2B9800388B28 /* AppDelegate.swift in Sources */,
 				ACF96C19232F0CEA0082F179 /* MovieListDataProvider.swift in Sources */,
 			);

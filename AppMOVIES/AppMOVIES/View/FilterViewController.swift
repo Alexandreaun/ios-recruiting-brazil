@@ -12,6 +12,10 @@ class FilterViewController: UIViewController {
     
     @IBOutlet weak var filterTableView: UITableView!
     
+    
+    var year: String?
+    var genres: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,7 +25,22 @@ class FilterViewController: UIViewController {
         filterTableView.tableFooterView = UIView()
     }
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        
+        
+        
+    }
+    
+    
+    
+    @IBAction func applyFilterButton(_ sender: UIButton) {
+        
+        print(year)
+        print(genres)
+        
+    }
+    
+    
 
 }
 
@@ -39,10 +58,10 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource{
 
         if indexPath.row == 0{
             cell.textLabel?.text = "Date"
-            cell.detailTextLabel?.text = ""
+            cell.detailTextLabel?.text = year
         }else{
             cell.textLabel?.text = "Genres"
-            cell.detailTextLabel?.text = ""
+            cell.detailTextLabel?.text = genres
         }
         
         return cell

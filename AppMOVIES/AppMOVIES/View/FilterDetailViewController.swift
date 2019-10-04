@@ -13,7 +13,8 @@ class FilterDetailViewController: UIViewController {
     
     @IBOutlet weak var filterTableView: UITableView!
     
-    
+    let filterDataProvider = FilterDataProvider()
+    let filterViewController = FilterViewController()
     var movie: [Movies]?
     var genres: [Genre]?
     var index = IndexPath()
@@ -23,7 +24,7 @@ class FilterDetailViewController: UIViewController {
         
         filterTableView.delegate = self
         filterTableView.dataSource = self
-    }
+        }
 }
 
 extension FilterDetailViewController: UITableViewDataSource, UITableViewDelegate{
@@ -37,8 +38,8 @@ extension FilterDetailViewController: UITableViewDataSource, UITableViewDelegate
             
         }else{
             
-           guard let genre = genres else {return 0}
-            return genre.count
+        //   guard let genre = genres else {return 0}
+            return filterDataProvider.filterGenresMoviesFavorites().count
         }
     }
 
@@ -50,17 +51,46 @@ extension FilterDetailViewController: UITableViewDataSource, UITableViewDelegate
             
             guard let movies = movie else {return UITableViewCell()}
 
-            cell.textLabel?.text = movies[indexPath.row].releaseDate
+            cell.textLabel?.text = filterDataProvider.formateYearMovie(movie: movies[indexPath.row])
 
         }else{
             
-            guard let genre = genres else {return UITableViewCell()}
 
-            cell.textLabel?.text = genre[indexPath.row].name
+            cell.textLabel?.text = filterDataProvider.filterGenresMoviesFavorites()[indexPath.row]
             
         }
         
         return cell
+        
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "filterStoryBoard") as? FilterViewController else {return}
+        
+        
+     //  if index.row == 0 {
+            
+            guard let movies = movie else {return}
+
+            let setYear = filterDataProvider.formateYearMovie(movie: movies[indexPath.row])
+            print("setou o ano \(setYear)")
+            
+            vc.year = setYear
+           // navigationController?.pushViewController(vc, animated: false)
+            
+      //  }else{
+            
+            let setGenre = filterDataProvider.filterGenresMoviesFavorites()[indexPath.row]
+            print("setou o genre \(setGenre)")
+            
+            vc.genres = setGenre
+        
+      //  }
+        
+        navigationController?.pushViewController(vc, animated: false)
+
         
     }
 
