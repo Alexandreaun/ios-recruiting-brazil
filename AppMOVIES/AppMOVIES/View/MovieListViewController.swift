@@ -16,7 +16,7 @@ class MovieListViewController: UIViewController, UITextFieldDelegate {
     
     let movieListDataProvider = MovieListDataProvider()
 //    let favoritesDataProvider = FavoritesDataProvider()
-    let favoriteViewController = FavoriteViewController()
+//    let favoriteViewController: FavoriteViewController?
     
     var arraySearchBar: [Movies] = []
     var searching: Bool = false

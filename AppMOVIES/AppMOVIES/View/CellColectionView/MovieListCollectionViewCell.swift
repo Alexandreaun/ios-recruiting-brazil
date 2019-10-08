@@ -24,7 +24,7 @@ class MovieListCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var favoriteButton: UIButton!
     
     weak var delegate:MovieListCellDelegate?
-    let favoriteViewController = FavoriteViewController()
+//    let favoriteViewController = FavoriteViewController()
     let movielistDataProvider = MovieListDataProvider()
     let movieListViewController = MovieListViewController()
     

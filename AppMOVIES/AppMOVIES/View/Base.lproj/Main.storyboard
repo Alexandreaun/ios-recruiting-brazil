@@ -13,7 +13,7 @@
         <!--Favorite View Controller-->
         <scene sceneID="dh5-t4-tMf">
             <objects>
-                <viewController id="Gc1-Da-9Ne" customClass="FavoriteViewController" customModule="AppMOVIES" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavoriteViewController" id="Gc1-Da-9Ne" customClass="FavoriteViewController" customModule="AppMOVIES" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kck-xf-sDo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -118,7 +118,7 @@
                             <constraint firstItem="cZR-Hm-iX4" firstAttribute="trailing" secondItem="TIj-ys-2vI" secondAttribute="trailing" constant="20" id="0Rd-pE-VuE"/>
                             <constraint firstItem="3jj-7O-pWT" firstAttribute="leading" secondItem="cZR-Hm-iX4" secondAttribute="leading" id="2fE-0M-8vj"/>
                             <constraint firstItem="3jj-7O-pWT" firstAttribute="top" secondItem="cZR-Hm-iX4" secondAttribute="top" id="3i9-vy-8IM"/>
-                            <constraint firstItem="TIj-ys-2vI" firstAttribute="top" secondItem="3jj-7O-pWT" secondAttribute="bottom" constant="417" id="lBQ-JI-8LB"/>
+                            <constraint firstItem="cZR-Hm-iX4" firstAttribute="bottom" secondItem="TIj-ys-2vI" secondAttribute="bottom" constant="106" id="b8D-yB-77k"/>
                             <constraint firstItem="TIj-ys-2vI" firstAttribute="leading" secondItem="cZR-Hm-iX4" secondAttribute="leading" constant="20" id="tMd-bP-JDi"/>
                             <constraint firstItem="3jj-7O-pWT" firstAttribute="trailing" secondItem="cZR-Hm-iX4" secondAttribute="trailing" id="z8v-cb-CxN"/>
                         </constraints>

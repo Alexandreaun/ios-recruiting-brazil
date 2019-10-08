@@ -8,19 +8,17 @@
 
 import UIKit
 
-protocol FavoriteCellDelegate: class {
-    func unfavoriteMovie(index: Int)
-    
-}
-
 class FavoriteViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var favoriteTableView: UITableView!
     
     let color = Colors()
+    var movie: Movies?
     
-    weak var delegate: FavoriteCellDelegate?
+    
+    var filterViewController: FilterViewController?
+  //  let filterDataProvider = FilterDataProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,15 +27,21 @@ class FavoriteViewController: UIViewController {
         
         favoriteTableView.delegate = self
         favoriteTableView.dataSource = self
-
         searchBar.barTintColor = .black
         
         favoriteTableView.tableFooterView = UIView()
         
+        filterViewController = self.storyboard?.instantiateViewController(withIdentifier: "filterStoryBoard") as? FilterViewController
+        filterViewController?.delegate = self
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        loadFavoriteMovie()
+       
+        favoriteTableView.reloadData()
+        // loadFavoriteMovie()
+        
     }
     
     func loadFavoriteMovie() {
@@ -53,12 +57,9 @@ class FavoriteViewController: UIViewController {
 
     @IBAction func filterButton(_ sender: UIBarButtonItem) {
         
-        guard let vc = storyboard?.instantiateViewController(withIdentifier: "filterStoryBoard") as? FilterViewController else {return }
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(filterViewController ?? FilterViewController(), animated: true)
         
     }
-    
-    
     
 }
 
@@ -72,8 +73,10 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteTableViewCell", for: indexPath) as? FavoriteTableViewCell else {
             return UITableViewCell()
         }
-    
+        
         cell.setupCell(movie: FavoritesDataProvider.shared.arrayMovies[indexPath.row])
+
+        
         return cell
     }
     
@@ -109,6 +112,17 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource{
             
         }
     }
+    
+    
+}
+
+extension FavoriteViewController: FilterApplyDelegate{
+    
+    func loadDataFilter() {
+        
+    FavoritesDataProvider.shared.arrayMovies = FavoritesDataProvider.shared.arrayMovies.filter({$0.releaseDate.formateDateYear(dateString: $0.releaseDate) == filterViewController?.year})
+
+   }
     
     
 }

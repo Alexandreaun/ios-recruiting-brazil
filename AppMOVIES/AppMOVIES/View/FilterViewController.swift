@@ -8,11 +8,15 @@
 
 import UIKit
 
+protocol FilterApplyDelegate: class {
+    func loadDataFilter()
+}
+
 class FilterViewController: UIViewController {
     
     @IBOutlet weak var filterTableView: UITableView!
     
-    
+    weak var delegate: FilterApplyDelegate?
     var year: String?
     var genres: String?
     
@@ -26,22 +30,26 @@ class FilterViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        
-        
+        super.viewWillAppear(animated)
+        filterTableView.reloadData()
     }
-    
-    
     
     @IBAction func applyFilterButton(_ sender: UIButton) {
         
-        print(year)
-        print(genres)
+//        guard let vc = storyboard?.instantiateViewController(withIdentifier: "FavoriteViewController") as? FavoriteViewController else {return}
+        
+        if year != nil{
+            
+            delegate?.loadDataFilter()
+            
+            navigationController?.popToRootViewController(animated: true)
+
+        }else{
+            
+        }
         
     }
     
-    
-
 }
 
 
@@ -79,11 +87,13 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource{
         
           vc.index = indexPath
           vc.movie = FavoritesDataProvider.shared.arrayMovies
-        navigationController?.pushViewController(vc, animated: true)
+            vc.filterViewController = self
+            navigationController?.pushViewController(vc, animated: true)
             
         }else{
             
             vc.index = indexPath
+            vc.filterViewController = self
             vc.genres = FavoritesDataProvider.shared.arrayGenres
             navigationController?.pushViewController(vc, animated: true)
             
@@ -91,11 +101,5 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource{
         
     }
     
-    
-    
-    
-    
-    
-    
-    
+ 
 }
