@@ -39,20 +39,27 @@ class FilterDataProvider{
         
     }
     
-    func formateYearMovie(movie: Movies) -> String{
+    
+    func filterYearMoviesFavorite() -> [String]{
         
-        let dateString = movie.releaseDate
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        guard let date = formatter.date(from: dateString)else{
-            return ""
+        var yearMoviesFavorite: [String] = []
+        
+        for movie in movies{
+            
+            yearMoviesFavorite.append(movie.releaseDate.formateDateYear(dateString: movie.releaseDate))
+            
         }
-        formatter.dateFormat = "yyyy"
-        let year = formatter.string(from: date)
         
-        return year
+        let removeDuplicates = NSOrderedSet(array: yearMoviesFavorite)
+        
+        return removeDuplicates.array as? [String] ?? []
         
     }
+    
+    
+  
+    
+
     
 
     

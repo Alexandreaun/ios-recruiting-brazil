@@ -12,6 +12,7 @@ class FavoriteViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var favoriteTableView: UITableView!
+    @IBOutlet weak var buttonRemoveFilter: UIButton!
     
     let color = Colors()
     var movie: Movies?
@@ -35,31 +36,49 @@ class FavoriteViewController: UIViewController {
         filterViewController?.delegate = self
         
         
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
        
-        favoriteTableView.reloadData()
-        // loadFavoriteMovie()
+        
+    }
+    
+    @IBAction func filterButton(_ sender: UIBarButtonItem) {
+        
+        navigationController?.pushViewController(filterViewController ?? FilterViewController(), animated: true)
         
     }
     
     func loadFavoriteMovie() {
         FavoritesDataProvider.shared.loadInformation { (movies, genre) in
             if movies != nil{
-                if let movie = movies{
-                    favoriteTableView.reloadData()
-                }
+                
+                guard let movie = movies else { return }
+                
+                FavoritesDataProvider.shared.arrayMovies = movie
+                
+                favoriteTableView.reloadData()
+                
             }
         }
     }
     
-
-    @IBAction func filterButton(_ sender: UIBarButtonItem) {
+    
+    @IBAction func buttonRemoveFilter(_ sender: UIButton) {
         
-        navigationController?.pushViewController(filterViewController ?? FilterViewController(), animated: true)
+        buttonRemoveFilter.isSelected = !buttonRemoveFilter.isSelected
+        
+        buttonRemoveFilter = sender
+        
+        
+        loadFavoriteMovie()
+        
+        buttonRemoveFilter.tintColor = .black
+
         
     }
+    
     
 }
 
@@ -121,8 +140,13 @@ extension FavoriteViewController: FilterApplyDelegate{
     func loadDataFilter() {
         
     FavoritesDataProvider.shared.arrayMovies = FavoritesDataProvider.shared.arrayMovies.filter({$0.releaseDate.formateDateYear(dateString: $0.releaseDate) == filterViewController?.year})
-
+        favoriteTableView.reloadData()
    }
+    
+    func loadDataGenre() {
+        
+    }
+    
     
     
 }

@@ -10,6 +10,7 @@ import UIKit
 
 protocol FilterApplyDelegate: class {
     func loadDataFilter()
+    func loadDataGenre()
 }
 
 class FilterViewController: UIViewController {
@@ -23,7 +24,6 @@ class FilterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         filterTableView.delegate = self
         filterTableView.dataSource = self
         filterTableView.tableFooterView = UIView()
@@ -46,12 +46,13 @@ class FilterViewController: UIViewController {
 
         }else{
             
+            
+            
         }
         
     }
     
 }
-
 
 extension FilterViewController: UITableViewDelegate, UITableViewDataSource{
     

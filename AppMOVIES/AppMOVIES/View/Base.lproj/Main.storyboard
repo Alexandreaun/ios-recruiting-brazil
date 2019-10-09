@@ -19,24 +19,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VHZ-mC-onc">
-                                <rect key="frame" x="0.0" y="144" width="414" height="669"/>
+                                <rect key="frame" x="0.0" y="194" width="414" height="619"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="jJZ-0g-tth">
                                 <rect key="frame" x="0.0" y="88" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bX0-vD-J8s">
+                                <rect key="frame" x="0.0" y="144" width="414" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Q4i-tm-Scl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="21"/>
+                                <color key="tintColor" red="1" green="0.81669415720000005" blue="0.26481132419999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Remove Filter"/>
+                                <connections>
+                                    <action selector="buttonRemoveFilter:" destination="Gc1-Da-9Ne" eventType="touchUpInside" id="IJT-IN-7NV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="VHZ-mC-onc" firstAttribute="top" secondItem="jJZ-0g-tth" secondAttribute="bottom" id="3hI-d8-XDO"/>
-                            <constraint firstItem="VHZ-mC-onc" firstAttribute="leading" secondItem="R7c-Hc-Ooy" secondAttribute="leading" id="9Rg-a0-IEh"/>
-                            <constraint firstItem="VHZ-mC-onc" firstAttribute="bottom" secondItem="R7c-Hc-Ooy" secondAttribute="bottom" id="K8E-uN-3xu"/>
+                            <constraint firstItem="VHZ-mC-onc" firstAttribute="leading" secondItem="R7c-Hc-Ooy" secondAttribute="leading" id="DDw-ZN-I3a"/>
+                            <constraint firstItem="R7c-Hc-Ooy" firstAttribute="trailing" secondItem="bX0-vD-J8s" secondAttribute="trailing" id="Fz9-v5-C4D"/>
+                            <constraint firstItem="bX0-vD-J8s" firstAttribute="leading" secondItem="R7c-Hc-Ooy" secondAttribute="leading" id="KbS-16-pGv"/>
+                            <constraint firstItem="VHZ-mC-onc" firstAttribute="trailing" secondItem="R7c-Hc-Ooy" secondAttribute="trailing" id="Nhl-in-dQL"/>
+                            <constraint firstItem="bX0-vD-J8s" firstAttribute="top" secondItem="jJZ-0g-tth" secondAttribute="bottom" id="RfO-wS-xe0"/>
                             <constraint firstItem="jJZ-0g-tth" firstAttribute="leading" secondItem="R7c-Hc-Ooy" secondAttribute="leading" id="SSA-Z0-cO6"/>
                             <constraint firstItem="jJZ-0g-tth" firstAttribute="top" secondItem="R7c-Hc-Ooy" secondAttribute="top" id="Sv4-k5-xXz"/>
-                            <constraint firstItem="VHZ-mC-onc" firstAttribute="trailing" secondItem="R7c-Hc-Ooy" secondAttribute="trailing" id="VUz-Vh-uJH"/>
+                            <constraint firstItem="VHZ-mC-onc" firstAttribute="bottom" secondItem="R7c-Hc-Ooy" secondAttribute="bottom" id="Yqd-uC-d4B"/>
                             <constraint firstItem="jJZ-0g-tth" firstAttribute="trailing" secondItem="R7c-Hc-Ooy" secondAttribute="trailing" id="cAj-Fg-gfK"/>
-                            <constraint firstItem="VHZ-mC-onc" firstAttribute="top" secondItem="jJZ-0g-tth" secondAttribute="bottom" id="iN9-pv-lFF"/>
+                            <constraint firstItem="VHZ-mC-onc" firstAttribute="top" secondItem="bX0-vD-J8s" secondAttribute="bottom" id="pZl-SP-71k"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="R7c-Hc-Ooy"/>
                     </view>
@@ -49,6 +64,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="buttonRemoveFilter" destination="bX0-vD-J8s" id="7kU-Va-Vch"/>
                         <outlet property="favoriteTableView" destination="VHZ-mC-onc" id="QtB-86-gSo"/>
                         <outlet property="searchBar" destination="jJZ-0g-tth" id="ceu-l5-Z8a"/>
                     </connections>

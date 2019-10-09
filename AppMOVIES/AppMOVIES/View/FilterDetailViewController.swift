@@ -33,12 +33,13 @@ extension FilterDetailViewController: UITableViewDataSource, UITableViewDelegate
 
         if index.row == 0{
             
-            guard let movies = movie else {return 0}
-            return movies.count
+//            guard let movies = movie else {return 0}
+//            return movies.count
+
+            return filterDataProvider.filterYearMoviesFavorite().count
             
         }else{
             
-        //   guard let genre = genres else {return 0}
             return filterDataProvider.filterGenresMoviesFavorites().count
         }
     }
@@ -49,13 +50,12 @@ extension FilterDetailViewController: UITableViewDataSource, UITableViewDelegate
         
         if index.row == 0{
             
-            guard let movies = movie else {return UITableViewCell()}
+//            guard let movies = movie else {return UITableViewCell()}
 
-            cell.textLabel?.text = filterDataProvider.formateYearMovie(movie: movies[indexPath.row])
+            cell.textLabel?.text = filterDataProvider.filterYearMoviesFavorite()[indexPath.row]
 
         }else{
             
-
             cell.textLabel?.text = filterDataProvider.filterGenresMoviesFavorites()[indexPath.row]
             
         }
@@ -72,9 +72,8 @@ extension FilterDetailViewController: UITableViewDataSource, UITableViewDelegate
         
        if index.row == 0 {
             
-            guard let movies = movie else {return}
 
-            let setYear = filterDataProvider.formateYearMovie(movie: movies[indexPath.row])
+            let setYear = filterDataProvider.filterYearMoviesFavorite()[indexPath.row]
             print("setou o ano \(setYear)")
             filterViewController?.year = setYear
 //            vc.year = setYear
