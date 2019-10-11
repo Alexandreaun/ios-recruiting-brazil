@@ -56,7 +56,7 @@ extension FilterDetailViewController: UITableViewDataSource, UITableViewDelegate
 
         }else{
             
-            cell.textLabel?.text = filterDataProvider.filterGenresMoviesFavorites()[indexPath.row]
+            cell.textLabel?.text = filterDataProvider.filterGenresMoviesFavorites()[indexPath.row].name
             
         }
         

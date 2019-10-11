@@ -30,7 +30,6 @@ class MovieListCollectionViewCell: UICollectionViewCell {
     
     let api = Api()
     var index: IndexPath!
-    var indexUnfavorite: Int = 0
     
     
     override func awakeFromNib() {

@@ -10,16 +10,16 @@ import UIKit
 
 protocol FilterApplyDelegate: class {
     func loadDataFilter()
-    func loadDataGenre()
 }
 
 class FilterViewController: UIViewController {
     
+
     @IBOutlet weak var filterTableView: UITableView!
     
     weak var delegate: FilterApplyDelegate?
     var year: String?
-    var genres: String?
+    var genres: Genre?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,12 +46,8 @@ class FilterViewController: UIViewController {
 
         }else{
             
-            
-            
         }
-        
     }
-    
 }
 
 extension FilterViewController: UITableViewDelegate, UITableViewDataSource{
@@ -62,21 +58,17 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-    if let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell"){
-
-        if indexPath.row == 0{
-            cell.textLabel?.text = "Date"
-            cell.detailTextLabel?.text = year
-        }else{
-            cell.textLabel?.text = "Genres"
-            cell.detailTextLabel?.text = genres
-        }
-        
-        return cell
-
-    }else{
-        return UITableViewCell()
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell"){
+            if indexPath.row == 0{
+                cell.textLabel?.text = "Date"
+                cell.detailTextLabel?.text = year
+            }else{
+                cell.textLabel?.text = "Genres"
+                cell.detailTextLabel?.text = genres?.name
+            }
+            return cell
+        } else{
+            return UITableViewCell()
         }
     }
     
@@ -99,8 +91,5 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource{
             navigationController?.pushViewController(vc, animated: true)
             
         }
-        
     }
-    
- 
 }

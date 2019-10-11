@@ -35,15 +35,21 @@ class FavoriteViewController: UIViewController {
         filterViewController = self.storyboard?.instantiateViewController(withIdentifier: "filterStoryBoard") as? FilterViewController
         filterViewController?.delegate = self
         
-        
-        
+//        loadFavoriteMovie()
+//        favoriteTableView.reloadData()
+
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
-       
-        
+        buttonRemoveFilter.tintColor = color.colorYellow
+        if filterViewController?.year == nil && filterViewController?.genres == nil {
+            loadFavoriteMovie()
+        }
+        favoriteTableView.reloadData()
+
     }
-    
+
     @IBAction func filterButton(_ sender: UIBarButtonItem) {
         
         navigationController?.pushViewController(filterViewController ?? FilterViewController(), animated: true)
@@ -67,15 +73,10 @@ class FavoriteViewController: UIViewController {
     
     @IBAction func buttonRemoveFilter(_ sender: UIButton) {
         
-        buttonRemoveFilter.isSelected = !buttonRemoveFilter.isSelected
-        
-        buttonRemoveFilter = sender
-        
-        
-        loadFavoriteMovie()
-        
         buttonRemoveFilter.tintColor = .black
-
+        filterViewController?.year = nil
+        filterViewController?.genres = nil
+        loadFavoriteMovie()
         
     }
     
@@ -137,16 +138,18 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource{
 
 extension FavoriteViewController: FilterApplyDelegate{
     
+
     func loadDataFilter() {
         
-    FavoritesDataProvider.shared.arrayMovies = FavoritesDataProvider.shared.arrayMovies.filter({$0.releaseDate.formateDateYear(dateString: $0.releaseDate) == filterViewController?.year})
+        let year = FavoritesDataProvider.shared.arrayMovies.filter({$0.releaseDate.formateDateYear(dateString: $0.releaseDate) == filterViewController?.year})
+        
+        let genre = FavoritesDataProvider.shared.arrayMovies.filter({$0.genreIds.contains(filterViewController?.genres?.id ?? 0)})
+        
+        FavoritesDataProvider.shared.arrayMovies = year + genre
+        
+        
         favoriteTableView.reloadData()
    }
-    
-    func loadDataGenre() {
-        
-    }
-    
     
     
 }

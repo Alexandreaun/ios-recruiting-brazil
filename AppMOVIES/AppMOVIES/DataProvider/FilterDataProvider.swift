@@ -14,9 +14,9 @@ class FilterDataProvider{
     let movies = FavoritesDataProvider.shared.arrayMovies
     let genres = FavoritesDataProvider.shared.arrayGenres
     
-    func filterGenresMoviesFavorites() -> [String]{
+    func filterGenresMoviesFavorites() -> [Genre]{
         
-        var genresMoviesFavorites: [String] = []
+        var genresMoviesFavorites: [Genre] = []
         
         for idGenres in genres{
             
@@ -26,7 +26,7 @@ class FilterDataProvider{
                     
                     if id == idGenres.id{
                         
-                        genresMoviesFavorites.append(idGenres.name)
+                        genresMoviesFavorites.append(idGenres)
                     }
                 }
             }
@@ -35,7 +35,7 @@ class FilterDataProvider{
         
         let removeDuplicates = NSOrderedSet(array: genresMoviesFavorites)
 
-        return removeDuplicates.array as? [String] ?? []
+        return removeDuplicates.array as? [Genre] ?? []
         
     }
     

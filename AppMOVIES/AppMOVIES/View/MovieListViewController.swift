@@ -16,7 +16,7 @@ class MovieListViewController: UIViewController, UITextFieldDelegate {
     
     let movieListDataProvider = MovieListDataProvider()
 //    let favoritesDataProvider = FavoritesDataProvider()
-//    let favoriteViewController: FavoriteViewController?
+    var favoriteViewController: FavoriteViewController?
     
     var arraySearchBar: [Movies] = []
     var searching: Bool = false
@@ -167,6 +167,7 @@ extension MovieListViewController: MovieListCellDelegate{
             FavoritesDataProvider.shared.saveInformation(movie: arraySearchBar[index.item], genres: movieListDataProvider.arrayGenres, indexpath: index.item)
         }else{
             FavoritesDataProvider.shared.saveInformation(movie: movieListDataProvider.arrayMovies[index.item], genres: movieListDataProvider.arrayGenres, indexpath: index.item)
+            
         }
     }
 
