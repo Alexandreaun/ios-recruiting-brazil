@@ -16,8 +16,6 @@
 		ACE9EC7F232D2B9A00388B28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACE9EC7E232D2B9A00388B28 /* Assets.xcassets */; };
 		ACE9EC82232D2B9A00388B28 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACE9EC80232D2B9A00388B28 /* LaunchScreen.storyboard */; };
 		ACEA7C4A2332D48A00944037 /* FavoritesDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEA7C492332D48A00944037 /* FavoritesDataProvider.swift */; };
-		ACEAAC3B2342D6F0009FB92F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAAC392342D6F0009FB92F /* ErrorView.swift */; };
-		ACEAAC3C2342D6F0009FB92F /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACEAAC3A2342D6F0009FB92F /* ErrorView.xib */; };
 		ACEAAC3F23441B6F009FB92F /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAAC3E23441B6F009FB92F /* FilterViewController.swift */; };
 		ACEAAC41234428D5009FB92F /* FilterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAAC40234428D5009FB92F /* FilterDetailViewController.swift */; };
 		ACEADE6523457BEE001427C5 /* FilterDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEADE6423457BEE001427C5 /* FilterDataProvider.swift */; };
@@ -52,8 +50,6 @@
 		ACE9EC81232D2B9A00388B28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ACE9EC83232D2B9A00388B28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACEA7C492332D48A00944037 /* FavoritesDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDataProvider.swift; sourceTree = "<group>"; };
-		ACEAAC392342D6F0009FB92F /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
-		ACEAAC3A2342D6F0009FB92F /* ErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
 		ACEAAC3E23441B6F009FB92F /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		ACEAAC40234428D5009FB92F /* FilterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailViewController.swift; sourceTree = "<group>"; };
 		ACEADE6423457BEE001427C5 /* FilterDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDataProvider.swift; sourceTree = "<group>"; };
@@ -137,15 +133,6 @@
 			path = AppMOVIES;
 			sourceTree = "<group>";
 		};
-		ACEAAC3D2342D6F9009FB92F /* ErrorView */ = {
-			isa = PBXGroup;
-			children = (
-				ACEAAC392342D6F0009FB92F /* ErrorView.swift */,
-				ACEAAC3A2342D6F0009FB92F /* ErrorView.xib */,
-			);
-			path = ErrorView;
-			sourceTree = "<group>";
-		};
 		ACEC145023359C6900C81D52 /* CellTableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,7 +171,6 @@
 		ACF96C0B232EE7BB0082F179 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				ACEAAC3D2342D6F9009FB92F /* ErrorView */,
 				ACEC145023359C6900C81D52 /* CellTableView */,
 				ACF96C1C232F3AC20082F179 /* CellColectionView */,
 				ACF96C1A232F36C80082F179 /* FavoriteViewController.swift */,
@@ -289,7 +275,6 @@
 				ACE9EC82232D2B9A00388B28 /* LaunchScreen.storyboard in Resources */,
 				ACE9EC7F232D2B9A00388B28 /* Assets.xcassets in Resources */,
 				ACEC144F23359C4600C81D52 /* FavoriteTableViewCell.xib in Resources */,
-				ACEAAC3C2342D6F0009FB92F /* ErrorView.xib in Resources */,
 				ACE9EC7A232D2B9800388B28 /* Main.storyboard in Resources */,
 				ACF96C20232F3AE30082F179 /* MovieListCollectionViewCell.xib in Resources */,
 			);
@@ -349,7 +334,6 @@
 				ACEADE6523457BEE001427C5 /* FilterDataProvider.swift in Sources */,
 				ACEA7C4A2332D48A00944037 /* FavoritesDataProvider.swift in Sources */,
 				ACF96C15232EF8080082F179 /* ValidationError.swift in Sources */,
-				ACEAAC3B2342D6F0009FB92F /* ErrorView.swift in Sources */,
 				ACEC144E23359C4600C81D52 /* FavoriteTableViewCell.swift in Sources */,
 				ACEAAC41234428D5009FB92F /* FilterDetailViewController.swift in Sources */,
 				ACE841512330595000E7494A /* Genres.swift in Sources */,

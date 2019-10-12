@@ -10,7 +10,6 @@ import UIKit
 
 class MovieListViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var errorView: ErrorView!
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -29,7 +28,6 @@ class MovieListViewController: UIViewController, UITextFieldDelegate {
         
         moviesCollectionView.register(UINib(nibName: "MovieListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCell")
         
-        
         requestGenres()
         requestMovies()
         //addErrorView(error: ValidationError(imageError: "teste"))
@@ -37,20 +35,12 @@ class MovieListViewController: UIViewController, UITextFieldDelegate {
         moviesCollectionView.delegate = self
         searchBar.delegate = self
         
+        
+        searchBar.placeholder = "Buscar"
+        
     }
     
-    func addErrorView(error: ValidationError) {
-        errorView.error = error
-        print(errorView.error)
-        errorView.showError()
-//        let errorView = ErrorView(frame: moviesCollectionView.frame)
-//        view.addSubview(errorView)
-        //        let errorView1 = UINib(nibName: "ErrorView", bundle: nil)
-//        let errorView = ErrorView(frame: moviesCollectionView.frame)
-//        errorView.error = error
-//        self.view.addSubview(errorView)
-    }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         
         FavoritesDataProvider.shared.loadInformation { (movies, genre) in
@@ -70,6 +60,8 @@ class MovieListViewController: UIViewController, UITextFieldDelegate {
                     print(dataGenres, dataMovie)
                 })
                 //                print(self.movieListDataProvider.arrayGenres)
+            }else{
+                self.showError(error: error ?? NSError(), buttonLabel: "OK")
             }
         }
     }
@@ -82,6 +74,8 @@ class MovieListViewController: UIViewController, UITextFieldDelegate {
                     self.moviesCollectionView.reloadData()
                 }
                 
+            }else{
+                self.showError(error: error ?? NSError(), buttonLabel: "OK")
             }
         }
     }
@@ -235,25 +229,27 @@ extension MovieListViewController: MovieListCellDelegate{
 extension MovieListViewController: UISearchBarDelegate{
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    
         arraySearchBar = movieListDataProvider.arrayMovies.filter({$0.title.prefix(searchText.count) == searchText})
         searching = true
+        
         moviesCollectionView.reloadData()
+        
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
+        
+        if arraySearchBar.count == 0{
+            
+            let error = ValidationError(titleError: "", messageError: "Não Existe Filmes com este nome")
+            showError(error: error, buttonLabel: "OK")
+            
+            
+        }else{
+            searchBar.resignFirstResponder()
+        }
+
     }
+    
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

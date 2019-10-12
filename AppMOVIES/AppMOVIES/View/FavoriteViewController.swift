@@ -145,10 +145,20 @@ extension FavoriteViewController: FilterApplyDelegate{
         
         let genre = FavoritesDataProvider.shared.arrayMovies.filter({$0.genreIds.contains(filterViewController?.genres?.id ?? 0)})
         
-        FavoritesDataProvider.shared.arrayMovies = year + genre
         
+        let containsYear = genre.contains(where: {$0.releaseDate.formateDateYear(dateString: $0.releaseDate) == filterViewController?.year})
+        
+        if containsYear{
+            FavoritesDataProvider.shared.arrayMovies = genre
+
+        }else{
+            FavoritesDataProvider.shared.arrayMovies = year + genre
+
+        }
         
         favoriteTableView.reloadData()
+
+        
    }
     
     

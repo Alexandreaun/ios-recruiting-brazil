@@ -11,10 +11,11 @@ import UIKit
 
 class ValidationError: NSError{
     
-    var imageError: String = ""
+    var titleError: String = ""
+    var messageError: String = ""
     
-    init(imageError: String) {
-        super.init(domain: imageError, code: 400, userInfo: [NSLocalizedDescriptionKey: imageError])
+    init(titleError: String, messageError: String){
+        super.init(domain: titleError, code: 400, userInfo: [NSLocalizedDescriptionKey: messageError])
     }
     
     required init?(coder aDecoder: NSCoder) {

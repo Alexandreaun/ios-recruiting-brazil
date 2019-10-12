@@ -34,6 +34,7 @@ class FilterDataProvider{
         }
         
         let removeDuplicates = NSOrderedSet(array: genresMoviesFavorites)
+        print(removeDuplicates.array as? [Genre] ?? [])
 
         return removeDuplicates.array as? [Genre] ?? []
         

@@ -38,14 +38,15 @@ class FilterViewController: UIViewController {
         
 //        guard let vc = storyboard?.instantiateViewController(withIdentifier: "FavoriteViewController") as? FavoriteViewController else {return}
         
-        if year != nil{
+        if year != nil || genres != nil{
             
             delegate?.loadDataFilter()
             
             navigationController?.popToRootViewController(animated: true)
 
         }else{
-            
+            let error = ValidationError(titleError: "Error", messageError: "Selecione algum dado para filtrar")
+            showError(error: error, buttonLabel: "OK")
         }
     }
 }
